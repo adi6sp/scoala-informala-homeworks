@@ -6,8 +6,9 @@ import java.util.Date;
 public abstract class BankAccount {
 
 	protected float balance;
-	private Date accountCreationDate;
+    protected Date accountCreationDate;
 	private float monthlyFee;
+	protected Date accountCreationTime;
 
 	public BankAccount(Date accountCreationDate, float monthlyFee) {
 		super();

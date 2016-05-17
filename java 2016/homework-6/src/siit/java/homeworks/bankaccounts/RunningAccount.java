@@ -7,5 +7,6 @@ public class RunningAccount extends BankAccount {
 	public RunningAccount(Date accountCreationDate, float monthlyFee) {
 		super(accountCreationDate, monthlyFee);
 	}
-
+	
 }
+
