@@ -25,17 +25,29 @@ public class Main {
 			votes.save(new CitizenVot("9555682954009","Stevie Wonder", " "));
 			votes.save(new CitizenVot("1982037357397","Dick Dastardly", "Muttley"));
 			votes.save(new CitizenVot("6789293661803","Scooby Doo", "Mr. Bean"));
-			calculate.checkCitizenVotes();
-			System.out.println("--------------------------------------------");
-			System.out.println("Invalide votes "+calculate.invalidVotes);
-			System.out.println("Valide votes "+calculate.validVotes);
-			System.out.println("Mr. Bean votes "+calculate.votesForMrBean+" %");
-			System.out.println("Spirt Mona votes "+calculate.votesForSpirtMona+" %");
-			System.out.println("Muttley votes "+calculate.votesForMuttley+" %");
-			System.out.println("A tree votes "+calculate.votesForAtree+" %");
 			votes.close();
+			reportCountingVotes(calculate);
 		}
-		
 	}
 
+	private synchronized static void reportCountingVotes(CountingProcess calculate) {
+		new Thread("votes-thread") {
+			public void run() {
+				try {
+						Thread.sleep(5000);
+						calculate.checkCitizenVotes();
+						System.out.println("--------------------------------------------");
+						System.out.println("Invalide votes "+calculate.invalidVotes);
+						System.out.println("Valide votes "+calculate.validVotes);
+						System.out.println("Mr. Bean votes "+calculate.votesForMrBean+" %");
+						System.out.println("Spirt Mona votes "+calculate.votesForSpirtMona+" %");
+						System.out.println("Muttley votes "+calculate.votesForMuttley+" %");
+						System.out.println("A tree votes "+calculate.votesForAtree+" %");
+		
+				}catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}.start();
+	}
 }

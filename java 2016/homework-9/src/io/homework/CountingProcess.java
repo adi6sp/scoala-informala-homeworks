@@ -27,31 +27,30 @@ public class CountingProcess {
 		this.vote = vote;
 	}
 	
-	public void checkCitizenVotes() throws IOException{
+	public synchronized void checkCitizenVotes() throws IOException{
+			
 		List <CitizenVot> allVotes = vote.loadAll();
-		List <CitizenVot> newListAllVotes = new ArrayList<>();
-		
+		List <CitizenVot> newListAllVotes = new ArrayList<>();		
 		for (CitizenVot citizen : allVotes) {
-			System.out.println(citizen);
 			if (citizen.getCandidateName().equals(" ")){
 				calculateInvalidVotes();
 			}else{
-			if (newListAllVotes.isEmpty()){
-				newListAllVotes.add(citizen);
-			}else{
-				countingVotes(newListAllVotes, citizen);
-				if (ilegalVote == true){
-					System.out.println(citizen.getName()+" has broken the rules and will be fined. All of his votes are invalidated.");
-				}
-			}	
+				if (newListAllVotes.isEmpty()){
+					newListAllVotes.add(citizen);
+				}else{
+					countingVotes(newListAllVotes, citizen);
+					if (ilegalVote == true){
+						System.out.println(citizen.getName()+" has broken the rules and will be fined. All of his votes are invalidated.");
+					}
+				}	
 			}
 		}
 		votesForMrBean = calculatePercentage(validVotes, votesForMrBean);
 		votesForSpirtMona = calculatePercentage(validVotes, votesForSpirtMona);
 		votesForAtree = calculatePercentage(validVotes, votesForAtree);
 		votesForMuttley = calculatePercentage(validVotes, votesForMuttley);
+						
 	}
-
 	private void countingVotes(List<CitizenVot> allValidVotes, CitizenVot citizen) {
 		ilegalVote = false;
 		for (CitizenVot citizenVot : allValidVotes){

@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class VotesList implements Votes,AutoCloseable {
 
@@ -14,15 +15,24 @@ public class VotesList implements Votes,AutoCloseable {
 	private FileWriter writer;
 	
 	@Override
-	public void save(CitizenVot citizenVot) throws IOException {
-		File file = new File(FILE_NAME);
-		try (FileWriter writer = new FileWriter(file, true)) {
-			writer.write(citizenVot+"\n");
-		}
+	public synchronized void save(CitizenVot citizenVot) throws IOException {
+		new Thread("Voter-thread "){
+		public void run(){
+			try{
+				Thread.sleep(new Random().nextInt(3000));
+		         File file = new File(FILE_NAME);
+		         try (FileWriter writer = new FileWriter(file, true)) {
+			     writer.write(citizenVot+"\n");
+			     System.out.println(citizenVot);
+		         }
+				}catch (Exception e) {
+						e.printStackTrace(System.err);
+				}
+			} 
+		}.start();
 	}
-
 	@Override
-	public List<CitizenVot> loadAll() throws IOException {
+	public   List<CitizenVot> loadAll() throws IOException {
 		File file = new File(FILE_NAME);
 		List<CitizenVot> citizenVotes = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
