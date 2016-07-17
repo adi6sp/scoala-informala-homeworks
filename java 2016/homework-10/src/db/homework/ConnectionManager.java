@@ -12,7 +12,7 @@ public class ConnectionManager {
 		String url = new StringBuilder().append("jdbc:").append(type).append("://").append(host).append(":")
 				.append(port).append("/").append(dbName).append("?user=").append(user).append("&password=")
 				.append(pw).toString();
-		System.out.println("URL:" + url);
+
 		try {
 			connection = DriverManager.getConnection(url);
 		} catch (SQLException e) {

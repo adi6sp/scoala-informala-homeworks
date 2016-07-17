@@ -1,9 +1,12 @@
 package db.homework;
 
+import java.sql.Date;
+
 public interface OrderDao {
 
-	void getOrderById(int orderId);
-	void getAllOrders();
+	String getOrderById(int orderId);
+	int getAllOrders();
 	void deleteOrder(int orderId);
-	void createOrder();
+	void createOrder(String name, Date date, int id_customer, int id);
+	
 }

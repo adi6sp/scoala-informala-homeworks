@@ -2,8 +2,8 @@ package db.homework;
 
 public interface ProductDao {
 
-	void getProductById(int productId);
-	void getAllProducts();
+	String getProductById(int productId);
+	int getAllProducts();
 	void deleteProduct(int productId);
-	void createProduct();
+	void createProduct(int id, String name, String description);
 }

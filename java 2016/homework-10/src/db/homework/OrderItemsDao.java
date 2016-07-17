@@ -2,8 +2,8 @@ package db.homework;
 
 public interface OrderItemsDao {
 
-	void getOrderItemById(int orderItemId);
-	void getAllOrderItems();
+	int getOrderItemById(int orderItemId);
+	int getAllOrderItems();
 	void deleteOrderItem(int orderItemId);
-	void createOrderItem();
+	void createOrderItem(int id, int idOrder, int quantity, int idProduct);
 }
