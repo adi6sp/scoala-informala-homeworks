@@ -8,10 +8,7 @@ public class CustomerDaoTest {
 	@Test
 	public void getCustomerByIdIsValid(){
 		CustomerDao customer = new CustomerDaoImpl();
-		//customer.createCustomer(4, "bos", "bos@yahoo.com");
-		//customer.deleteCustomer(4);
 		String name = customer.getCustomerById(3);
-		//customer.getAllCustomers();
 		assertEquals("mumu", name);
 	}
 
