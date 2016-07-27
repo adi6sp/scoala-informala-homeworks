@@ -27,24 +27,6 @@ public class CustomerDaoImpl extends AbstractModelDao implements CustomerDao {
 	      } catch (SQLException e) {
 	    	  e.printStackTrace();
 	      }
-	      	if(st!=null)
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}finally{
-				      try{
-					         if(st!=null)
-					            conn.close();
-					      }catch(SQLException se){
-					      }
-					      try{
-					         if(conn!=null)
-					            conn.close();
-					      }catch(SQLException se){
-					         se.printStackTrace();
-					      }
-					}
 	}
 
 	@Override
@@ -61,19 +43,7 @@ public class CustomerDaoImpl extends AbstractModelDao implements CustomerDao {
 			rs.close();
 		   } catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-		      try{
-		         if(st!=null)
-		            conn.close();
-		      }catch(SQLException se){
-		      }
-		      try{
-		         if(conn!=null)
-		            conn.close();
-		      }catch(SQLException se){
-		         se.printStackTrace();
-		      }
-		}
+		   }
 		return name;
 	}
 
@@ -99,20 +69,8 @@ public class CustomerDaoImpl extends AbstractModelDao implements CustomerDao {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-		      try{
-		         if(st!=null)
-		            conn.close();
-		      }catch(SQLException se){
-		      }
-		      try{
-		         if(conn!=null)
-		            conn.close();
-		      }catch(SQLException se){
-		         se.printStackTrace();
-		      }
 		}
-		return numberOfRows;
+			return numberOfRows;
 	}
 
 
@@ -128,17 +86,10 @@ public class CustomerDaoImpl extends AbstractModelDao implements CustomerDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
-		      //finally block used to close resources
 		      try{
 		         if(stmt!=null)
 		            conn.close();
 		      }catch(SQLException se){
-		      }
-		      try{
-		         if(conn!=null)
-		            conn.close();
-		      }catch(SQLException se){
-		         se.printStackTrace();
 		      }
 		}
 	}
